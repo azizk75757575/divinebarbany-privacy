@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProofSpot Demo</title>
+<meta name="description" content="How ProofSpot proof works: a photo signed by the app that you can verify in your browser, an edited copy that is detected, Same Spot and field reports.">
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --bg: #f4f6f5; --card: #ffffff; --text: #0f1714; --muted: #5b6863; --line: #dfe5e2;
+    --ok: #12985a; --ok-bg: #e5f6ed; --bad: #c8322b; --bad-bg: #fbe9e8; --accent: #12985a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0e13; --card: #131921; --text: #eef2f1; --muted: #98a3a0; --line: #26303a;
+      --ok: #3ad17c; --ok-bg: #0f2a1d; --bad: #ff6b63; --bad-bg: #2d1514; --accent: #3ad17c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0e13; --card: #131921; --text: #eef2f1; --muted: #98a3a0; --line: #26303a;
+    --ok: #3ad17c; --ok-bg: #0f2a1d; --bad: #ff6b63; --bad-bg: #2d1514; --accent: #3ad17c;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 28px 16px 56px; }
+  header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  header svg { width: 40px; height: 40px; flex: none; }
+  h1 { font-size: 26px; line-height: 1.2; margin: 0; }
+  .lead { color: var(--muted); margin: 6px 0 26px; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; margin-bottom: 18px; }
+  h2 { font-size: 19px; margin: 0 0 6px; }
+  h2 .n { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--ok-bg); color: var(--ok); font-size: 14px; margin-right: 8px; vertical-align: 2px; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); font-size: 14.5px; }
+  .photo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .photo img { width: 100%; border-radius: 12px; border: 1px solid var(--line); display: block; }
+  dl { margin: 0 0 14px; display: grid; gap: 8px; }
+  dt { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; }
+  dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .btn { display: block; padding: 12px 14px; border-radius: 12px; text-decoration: none; font-weight: 650; margin-bottom: 10px; }
+  .btn.ok { background: var(--ok-bg); color: var(--ok); }
+  .btn.bad { background: var(--bad-bg); color: var(--bad); }
+  .btn small { display: block; font-weight: 500; color: var(--text); opacity: .8; margin-top: 3px; }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  figure { margin: 0; }
+  figure img { width: 100%; border-radius: 14px; border: 1px solid var(--line); display: block; }
+  figcaption { font-size: 14px; margin-top: 8px; }
+  figcaption b { display: block; }
+  .tag { display: inline-block; font-size: 12.5px; font-weight: 700; padding: 2px 9px; border-radius: 99px; }
+  .tag.ok { background: var(--ok-bg); color: var(--ok); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  video { width: 100%; max-width: 360px; display: block; margin: 0 auto; border-radius: 16px; border: 1px solid var(--line); background: #000; }
+  a { color: var(--accent); }
+  footer { font-size: 13.5px; color: var(--muted); margin-top: 8px; }
+  @media (max-width: 620px) {
+    .photo, .trio { grid-template-columns: minmax(0, 1fr); }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0b2a22"/><path d="M32 12c-8.3 0-15 6.5-15 14.6C17 37.5 32 52 32 52s15-14.5 15-25.4C47 18.5 40.3 12 32 12z" fill="#f7faf8"/><circle cx="32" cy="27" r="9.5" fill="#33d17a"/><path d="M27.5 27.2l3.2 3.3 6-6.6" stroke="#fff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h1>How ProofSpot proof works</h1>
+  </header>
+  <p class="lead">A short demo for App Review. A date printed on a photo proves nothing, because any photo editor can change it. ProofSpot signs each capture on the iPhone, so anyone can check when and where it was taken and whether the picture was edited.</p>
+
+  <section>
+    <h2><span class="n">1</span>A photo signed by ProofSpot</h2>
+    <div class="photo">
+      <a href="proofspot-demo/signed-photo.jpg"><img src="proofspot-demo/signed-photo.jpg" alt="Photo stamped and signed by ProofSpot, with its QR code"></a>
+      <div>
+        <p>This is the original file saved by the app. Its QR code (bottom right of the stamp) holds the signed record. Scanning it with any phone camera opens the first link below.</p>
+        <dl>
+          <dt>Proof code printed on the photo</dt><dd class="mono">EVNG-5K5C</dd>
+          <dt>Signed time</dt><dd>Friday, October 30, 2026, 12:51:51 UTC</dd>
+          <dt>Signed position</dt><dd class="mono">33.595400° N, 7.619700° W  ±4 m</dd>
+        </dl>
+        <p class="muted">The Simulator has no GPS, so this time and place are sample values from the app's demo mode. On an iPhone they come from the clock and GPS at the moment of capture.</p>
+        <a class="btn ok" href="v.html#AQFq5JLnFAZAUPt1U3gABAAmAggAtYiIiIiZmZmZmZmZmaqqiqqqlmequ6qqq8ycm7yb7n7qAiWldaAjkHkVMBuxavJJgJju54YdrU5LyBfj50ACK-A5Z9SHY6lJJCE1teqtUjrxwpl_ZKYUgWmRI5tVMx9_dhYFEzgkzBWPwK3jq50PrYqpw1Z9JFhh6RAPPJKK2CG73A">✔ Check this signature in your browser<small>The page verifies the ECDSA P-256 signature with WebCrypto. No account, no server.</small></a>
+        <a class="btn bad" href="v.html#AQFq5JLoFAZAUPt1U3gABAAmAggAtYiIiIiZmZmZmZmZmaqqiqqqlmequ6qqq8ycm7yb7n7qAiWldaAjkHkVMBuxavJJgJju54YdrU5LyBfj50ACK-A5Z9SHY6lJJCE1teqtUjrxwpl_ZKYUgWmRI5tVMx9_dhYFEzgkzBWPwK3jq50PrYqpw1Z9JFhh6RAPPJKK2CG73A">✖ Same proof with the time moved by one second<small>Any change to the time or place breaks the signature.</small></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span>An edited picture is detected</h2>
+    <p>The signature also covers a fingerprint of the picture, outside the stamp. In the app's Verify tab, the original passes. A copy where part of the picture was painted over, with the stamp and QR code left intact, is reported as modified.</p>
+    <div class="pair">
+      <figure><img src="proofspot-demo/verify-original.jpg" alt="Verify tab: Authentic and unmodified"><figcaption><span class="tag ok">Original</span><b>Authentic and unmodified</b></figcaption></figure>
+      <figure><img src="proofspot-demo/verify-edited.jpg" alt="Verify tab: Picture was modified"><figcaption><span class="tag bad">Edited copy</span><b>Picture was modified</b></figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span>Same Spot and field reports</h2>
+    <p>Same Spot brings the user back to a saved position: the first photo appears as a ghost, with distance, compass, tilt and level guides that turn green when aligned. Before and after photos can then be compared. Field visits become PDF reports with a map and the SHA-256 fingerprint of every file.</p>
+    <div class="trio">
+      <figure><img src="proofspot-demo/same-spot.jpg" alt="Same Spot ghost guides"><figcaption><b>Ghost and alignment guides</b></figcaption></figure>
+      <figure><img src="proofspot-demo/compare.jpg" alt="Before and after comparison"><figcaption><b>Before / after</b></figcaption></figure>
+      <figure><img src="proofspot-demo/report.jpg" alt="PDF field report"><figcaption><b>PDF field report</b></figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span>Video</h2>
+    <p class="muted">Recorded on the iOS Simulator, which has no camera: the pictures are painted samples, and they go through the app's real stamp, signature and verification code.</p>
+    <video src="proofspot-demo/demo.mp4" controls playsinline preload="metadata" poster="proofspot-demo/verify-original.jpg"></video>
+  </section>
+
+  <footer>On an iPhone the signing key is created and kept in the Secure Enclave; the Simulator uses a software key, so the verifier shows the Proof ID of a Simulator key. <a href="proofspot.html">Privacy policy</a> · <a href="v.html">Web verifier</a></footer>
+</main>
+</body>
+</html>
